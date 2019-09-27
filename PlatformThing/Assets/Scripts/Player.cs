@@ -6,20 +6,27 @@ public class Player : MonoBehaviour
 {
     //Referenced https://answers.unity.com/questions/707526/check-if-2d-character-is-grounded.html for groundcheck if you have a better way of doing it feel free to change
     //private for now can make public later
-    private int health;//Player health
+    private int startinghealth;
     public GameObject gameManager;
     GameManager gm;
     public float moveSpeed;
     public float jumpHeight;
     Rigidbody2D rgbd;
     bool isGrounded;
+    public PlayerAttributes pa;
+    public void ResetPlayer()
+    {
+        pa.health = startinghealth;
+        pa.Collectables = new List<GameObject>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         //Not sure if we decided on hearts or health bar(Can be changed)
-        health = 3;
+        startinghealth = 3;
         gm = gameManager.GetComponent<GameManager>();
         rgbd = this.gameObject.GetComponent<Rigidbody2D>();
+        pa = new PlayerAttributes();
     }
 
     // Update is called once per frame
